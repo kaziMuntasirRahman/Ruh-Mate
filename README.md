@@ -13,7 +13,7 @@ RuhMate is a web application designed to help users connect and collaborate. Vis
 
 1. Clone the repository:
  ```bash
- git clone https://github.com/your-username/ruh-mate-client.git
+ git clone https://github.com/kaziMuntasirRahman/Ruh-Mate.git
  ```
 2. Install dependencies:
  ```bash

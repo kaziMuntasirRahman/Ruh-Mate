@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
+import ContinueWithGoogle from "../components/ContinueWithGoogle";
 
 const Login = () => {
+
  const [email, setEmail] = useState("")
  const [pass, setPass] = useState("")
  const [loginLoading, setLoginLoading] = useState(false)
  const { logIn } = useContext(AuthContext)
+ const navigate = useNavigate()
 
  const handleLogin = async (e) => {
   setLoginLoading(true)
@@ -17,6 +20,9 @@ const Login = () => {
    const response = await logIn(email, pass)
    console.log(response)
    if (response.email) {
+    // Navigate to the home page after successful login
+    navigate('/')
+    // Show success alert
     Swal.fire({
      position: "center",
      icon: "success",
@@ -56,12 +62,15 @@ const Login = () => {
      <div className="card-body">
       <form onSubmit={handleLogin} className="fieldset">
        <label className="label">Email</label>
-       <input type="email" className="input" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+       <input type="email" className="input focus:outline-none focus:ring-2 focus:ring-[#E38580]" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
        <label className="label">Password</label>
-       <input type="password" className="input" placeholder="Password" onChange={(e) => setPass(e.target.value)} />
+       <input type="password" className="input focus:outline-none focus:ring-2 focus:ring-[#E38580]" placeholder="Password" onChange={(e) => setPass(e.target.value)} />
        <div><a className="link link-hover">Forgot password?</a></div>
        <button className="btn btn-neutral mt-4">Login</button>
       </form>
+      <div className="divider my-2">or</div>
+      {/* Google */}
+      <ContinueWithGoogle setLoading={setLoginLoading} />
       <div className="mt-4 text-center">
        <span>Don't have an account? </span>
        <Link to="/signup" className="link link-primary">Sign up</Link>

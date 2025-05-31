@@ -1,9 +1,36 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
- const { user, loading } = useContext(AuthContext);
+ const { user, loading, logOut } = useContext(AuthContext);
+
+ const handleLogout = async () => {
+  try {
+   const response = await logOut()
+   if (response) {
+    Swal.fire({
+     position: "center",
+     icon: "success",
+     title: "You've successfully logged out.",
+     showConfirmButton: false,
+     footer: "See You Later!",
+     timer: 2000
+    });
+   }
+  } catch (error) {
+   Swal.fire({
+    position: "center",
+    icon: "error",
+    title: "Sorry! Failed to Logout.",
+    showConfirmButton: false,
+    footer: "Try Later!",
+    timer: 2000
+   });
+   console.log(error)
+  }
+ }
  return (
   <nav>
    <div className="navbar bg-gray-100 shadow-sm px-5 md:px-20 lg:px-52">
@@ -51,13 +78,15 @@ const Navbar = () => {
        <div className="dropdown dropdown-hover dropdown-end">
         <img tabIndex={0} role="button" className="size-12" src="https://cdn-icons-png.flaticon.com/512/6998/6998080.png" alt={user.displayName} />
         <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-         <li><a>{user.displayName || ""}</a></li>
+         <li><a className="">{user.displayName || ""}</a></li>
+         <li><Link to="/profile">Profile</Link></li>
+         <li><button onClick={handleLogout}>Logout</button></li>
         </ul>
        </div>
       ) : (
-       <Link to="/login" className="btn bg-[#E38580] text-white" disabled={loading}>
+       <Link to="/login" className="btn bg-[#E38580] text-white min-w-[70px]">
         {loading ? (
-         <span className="loading loading-spinner loading-sm"></span>
+         <span className="loading loading-spinner loading-sm" />
         ) : (
          "Login"
         )}
