@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { AuthContext } from '../providers/AuthProvider'
 import useAxiosPublic from '../hooks/useAxiosPublic'
 
-const CheckoutForm = ({totalPrice=500, paymentEnable=true}) => {
+const CheckoutForm = ({totalPrice=5, paymentEnable=true}) => {
   const stripe = useStripe()
   const elements = useElements()
   const { user } = useContext(AuthContext)
