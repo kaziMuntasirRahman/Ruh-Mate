@@ -7,14 +7,14 @@ const PRIMARY_COLOR = '#E38580';
 
 const BuyConnection = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
+    if (!loading && !user) {
       navigate('/login');
     }
-  }, [user, navigate]);
+  }, [user, loading, navigate]);
 
   const plans = [
     { id: 1, name: 'Basic', price: 5, connections: 1 },
@@ -23,6 +23,14 @@ const BuyConnection = () => {
   ];
 
   const handleSelect = (plan) => setSelectedPlan(plan);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-xl font-semibold text-gray-600">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div

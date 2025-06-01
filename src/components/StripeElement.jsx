@@ -7,7 +7,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 const Payment = ({totalPrice=5, paymentEnable=true}) => {
  const loading = false;
  return (
-  <div className="relative flex flex-col items-center p-8 bg-gray-100 min-h-screen">
+  <div className="relative flex flex-col items-center p-8 bg-gray-100">
    {loading && (
     <div className="absolute inset-0 bg-slate-700/30 flex items-center justify-center z-50">
      <span className="loader scale-200"></span>
