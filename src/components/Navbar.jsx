@@ -52,6 +52,7 @@ const Navbar = () => {
        </li>
        <li><Link to="/about">About Us</Link></li>
        <li><Link to="/contact">Contact</Link></li>
+       <li><Link to="/buy-connection">Buy Connection</Link></li>
       </ul>
      </div>
      <Link to='/' className=" flex flex-col justify-center"><img className="h-8 object-contain" src="images/Ruh_Mate_Logo_rectangle-removebg-preview.png" /></Link>
@@ -70,6 +71,7 @@ const Navbar = () => {
       </li>
       <li><Link to="/about">About Us</Link></li>
       <li><Link to="/contact">Contact</Link></li>
+      <li><Link to="/buy-connection">Buy Connection</Link></li>
      </ul>
     </div>
     <div className="navbar-end">

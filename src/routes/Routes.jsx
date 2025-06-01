@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import BuyConnection from "../pages/BuyConnection";
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
    {
     path: '/contact',
     element: <Contact />
+   },
+   {
+    path: '/buy-connection',
+    element: <BuyConnection />
    }
   ]
  }

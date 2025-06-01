@@ -1,5 +1,6 @@
 import React from "react";
 import Banner from "../components/Banner";
+import StripeElement from "../components/StripeElement";
 
 const Home = () => {
  return (
