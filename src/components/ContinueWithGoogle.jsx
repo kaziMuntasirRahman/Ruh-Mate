@@ -2,36 +2,35 @@ import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 const ContinueWithGoogle = ({ setLoading }) => {
   const axiosPublic = useAxiosPublic()
-
   const { googleSignIn } = useContext(AuthContext)
+
+  const navigate = useNavigate()
+
 
 
   const handleGoogleSignIn = async () => {
     try {
       const response = await googleSignIn()
       if (response?.email) {
-        const modifiedUser = { name: response?.displayName, email: response?.email, photoURL: response?.photoURL, provider: 'google' }
-        console.log(modifiedUser)
-        const dbResponse = await axiosPublic.post('users', modifiedUser)
-        if (dbResponse?.data?.insertedId) {
-          const audio = new Audio('/assets/sound/success-1.mp3')
-          audio.play()
-          console.log("User info added to database.")
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "You've Successfully Registered.",
-            showConfirmButton: false,
-            footer: `Welcome ${response?.displayName}`,
-            timer: 2000
-          });
-        }
-        console.log(dbResponse)
-        const audio = new Audio('/assets/sound/success-1.mp3')
-        audio.play()
+        // const modifiedUser = { name: response?.displayName, email: response?.email, photoURL: response?.photoURL, provider: 'google' }
+        // console.log(modifiedUser)
+        // const dbResponse = await axiosPublic.post('users', modifiedUser)
+        // if (dbResponse?.data?.insertedId) {
+        //   console.log("User info added to database.")
+        //   Swal.fire({
+        //     position: "center",
+        //     icon: "success",
+        //     title: "You've Successfully Registered.",
+        //     showConfirmButton: false,
+        //     footer: `Welcome ${response?.displayName}`,
+        //     timer: 2000
+        //   });
+        // }
+        // console.log(dbResponse)
         Swal.fire({
           position: "center",
           icon: "success",
@@ -40,6 +39,7 @@ const ContinueWithGoogle = ({ setLoading }) => {
           footer: "Welcome",
           timer: 2000
         });
+        navigate('/')
       }
     } catch (err) {
       console.log(err.message)
